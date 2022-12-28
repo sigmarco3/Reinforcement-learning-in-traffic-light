@@ -95,44 +95,42 @@ if __name__ == '__main__':
                 actions = {ts: ql_agents[ts].act() for ts in ql_agents.keys()}
 
                 s, r, done, _ = env.step(action=actions)
-                #queste righe non dovrebbero servire più
-                # for agent_id in ql_agents.keys():
-                #     ql_agents[agent_id].learn(next_state=env.encode(s[agent_id], agent_id), reward=r[agent_id])
+                #queste righe non dovrebbero servire più  , learning fatto
+                for agent_id in ql_agents.keys():
+                     ql_agents[agent_id].learn(next_state=env.encode(s[agent_id], agent_id), reward=r[agent_id])
 
         env.save_csv(out_csv, run)
         env.close()
         output_file = 'output.csv'
 
-        # replace content
-        labels = ['s','a','r']
-        lista = ql_agents['t'].q_table.keys()
-        lista = list(lista)
+
+
 
         print("Printing original qtable: ")
 
         table = ql_agents['t'].q_table
         print(table)
-        myList = []
 
-        for s in table :
-            myList.append([s, table[s][:]])
-            #for a in table[s]:
-                #print(a)
-        #myList = list(myList)
+        #scrivo su file la tabella
+        try:
+            with open(output_file, "w", newline='') as fout:
+                writer = csv.writer(fout, delimiter=';')
+                # writer.writeheader()
+                for k, v in table.items():
+                    writer.writerow([k, v])
+                # for id in ql_agents['t'].q_table:
+                # s
+                #         writer.writerow(elem)
+        except IOError:
+            print("I/O error")
+        #test su lettura
+        dict = {}
+        with open(output_file, 'r') as file_name:
+            reader = csv.reader(file_name, delimiter=';')
+            dict = {rows[0]: rows[1] for rows in reader}
 
-        #print(myList)
-        # try:
-        #     with open(output_file, "w",newline='') as fout:
-        #          writer = csv.writer(fout,quoting=csv.QUOTE_ALL,delimiter=';')
-        #          #writer.writeheader()
-        #          for el in table
-        #          writer.writerows(myList)
-        #         # for id in ql_agents['t'].q_table:
-        #         #
-        #         #         writer.writerow(elem)
-        # except IOError:
-        #     print("I/O error")
-
+        print("tabella da file home \n")
+        print(dict)
 
         #plotResult(out_csv)
 
