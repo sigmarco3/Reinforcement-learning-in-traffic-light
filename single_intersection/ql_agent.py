@@ -26,10 +26,6 @@ class QLAgent:
 
     def act(self):
         self.q_table = self.readTable()
-        print("tIPO STATO :",type(self.state))
-        print("tabella da file \n")
-        print(self.q_table)
-
         self.action = self.exploration.choose(self.q_table, self.state, self.action_space)
         return self.action
 
