@@ -96,8 +96,8 @@ if __name__ == '__main__':
 
                 s, r, done, _ = env.step(action=actions)
                 #queste righe non dovrebbero servire più  , learning fatto
-                for agent_id in ql_agents.keys():
-                     ql_agents[agent_id].learn(next_state=env.encode(s[agent_id], agent_id), reward=r[agent_id])
+                #for agent_id in ql_agents.keys():
+                 #    ql_agents[agent_id].learn(next_state=env.encode(s[agent_id], agent_id), reward=r[agent_id])
 
         env.save_csv(out_csv, run)
         env.close()

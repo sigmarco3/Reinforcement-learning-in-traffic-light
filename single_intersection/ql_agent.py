@@ -5,7 +5,7 @@ import pandas as pd
 
 class QLAgent:
     def readTable(self):
-        with open("output2.txt",'r',newline='') as file_name:
+        with open("output.csv",'r',newline='') as file_name:
             reader=csv.reader(file_name,delimiter=';')
             dict={rows[0]:rows[1] for rows in reader}
 
