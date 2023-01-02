@@ -5,9 +5,13 @@ import pandas as pd
 
 class QLAgent:
     def readTable(self):
+        dict={}
         with open("output.csv",'r',newline='') as file_name:
             reader=csv.reader(file_name,delimiter=';')
-            dict={rows[0]:rows[1] for rows in reader}
+            for row in reader:
+
+                    k, v = row
+                    dict[k] = v
 
 
 
@@ -26,6 +30,9 @@ class QLAgent:
 
     def act(self):
         self.q_table = self.readTable()
+        print("\n tabella letta ")
+        print(self.q_table)
+        
         self.action = self.exploration.choose(self.q_table, self.state, self.action_space)
         return self.action
 

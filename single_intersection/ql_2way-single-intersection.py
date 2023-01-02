@@ -19,32 +19,6 @@ from ql_agent import QLAgent
 from sumo_rl.exploration import EpsilonGreedy
 
 
-def plotResult(file):
-    with open(file + '_conn0_run1.csv', newline="", encoding="ISO-8859-1") as filecsv:
-        lettore = csv.reader(filecsv, delimiter=",")
-        header = next(lettore)
-        print(header)
-        t = [(linea[0], linea[3]) for linea in lettore]
-        t = np.array(t)
-        dati = t[:, 1]
-
-        time = t[:, 0]
-        times = np.array(time)
-        dati = [float(s) for s in dati]
-
-        # print(datis.shape)
-
-        # fig = plt.figure()
-        # ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        plt.xlabel('secondi')
-        plt.ylabel('system total waiting time')
-        max = float(time[len(time)-1])
-        x=np.arange(0.0,)
-        plt.xticks(time)
-        plt.plot(time, dati, color='blue')
-
-        plt.show()
-
 if __name__ == '__main__':
 
     prs = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -59,13 +33,13 @@ if __name__ == '__main__':
     prs.add_argument("-maxgreen", dest="max_green", type=int, default=30, required=False, help="Maximum green time.\n")
     prs.add_argument("-gui", action="store_true", default=False, help="Run with visualization on SUMO.\n")
     prs.add_argument("-fixed", action="store_true", default=False, help="Run with fixed timing traffic signals.\n")
-    prs.add_argument("-s", dest="seconds", type=int, default=10000, required=False, help="Number of simulation seconds.\n")
+    prs.add_argument("-s", dest="seconds", type=int, default=500, required=False, help="Number of simulation seconds.\n")
     prs.add_argument("-r", dest="reward", type=str, default='wait', required=False, help="Reward function: [-r queue] for average queue reward or [-r wait] for waiting time reward.\n")
     prs.add_argument("-runs", dest="runs", type=int, default=1, help="Number of runs.\n")
     args = prs.parse_args()
     experiment_time = str(datetime.now()).split('.')[0]
     out_csv = 'outputs/2way-single-intersection/result'
-
+    output_file = 'output.csv'
     env = SumoEnvironment(net_file='nets/2way-single-intersection/single-intersection.net.xml',
                           route_file=args.route,
                           out_csv_name=out_csv,
@@ -101,38 +75,25 @@ if __name__ == '__main__':
 
         env.save_csv(out_csv, run)
         env.close()
-        output_file = 'output.csv'
 
 
 
-
-        print("Printing original qtable: ")
-
-        table = ql_agents['t'].q_table
-        print(table)
-
-        #scrivo su file la tabella
-        try:
-            with open(output_file, "w", newline='') as fout:
-                writer = csv.writer(fout, delimiter=';')
-                # writer.writeheader()
-                for k, v in table.items():
-                    writer.writerow([k, v])
-                # for id in ql_agents['t'].q_table:
-                # s
-                #         writer.writerow(elem)
-        except IOError:
-            print("I/O error")
+        #scrivo su file la tabella , commento perchè va dopo il learning
+        # try:
+        #     with open(output_file, "w", newline='') as fout:
+        #         writer = csv.writer(fout, delimiter=';')
+        #         # writer.writeheader()
+        #         for k, v in table.items():
+        #             writer.writerow([k, v])
+        #         # for id in ql_agents['t'].q_table:
+        #         # s
+        #         #         writer.writerow(elem)
+        # except IOError:
+        #     print("I/O error")
         #test su lettura
-        dict = {}
-        with open(output_file, 'r') as file_name:
-            reader = csv.reader(file_name, delimiter=';')
-            dict = {rows[0]: rows[1] for rows in reader}
 
-        print("tabella da file home \n")
-        print(dict)
 
-        #plotResult(out_csv)
+
 
 
 
