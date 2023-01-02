@@ -2,7 +2,7 @@ import numpy as np
 import csv
 from sumo_rl.exploration.epsilon_greedy import EpsilonGreedy
 import pandas as pd
-
+from ast import literal_eval
 class QLAgent:
     def readTable(self):
         dict={}
@@ -11,6 +11,8 @@ class QLAgent:
             for row in reader:
 
                     k, v = row
+                    k=literal_eval(k)
+                    v=literal_eval(v)
                     dict[k] = v
 
 
