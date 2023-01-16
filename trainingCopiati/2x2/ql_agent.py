@@ -1,12 +1,12 @@
 import numpy as np
 import csv
-from epsilon_greedy import EpsilonGreedy
+from sumo_rl.exploration import EpsilonGreedy
 import pandas as pd
 from ast import literal_eval
 class QLAgent:
     def readTable(self):
         dict={}
-        with open("output-alpha0.99-gamma0.1.csv",'r',newline='') as file_name:
+        with open("output-alpha0.1-gamma0.99.csv",'r',newline='') as file_name:
             reader=csv.reader(file_name,delimiter=';')
             for row in reader:
 
