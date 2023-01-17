@@ -38,7 +38,7 @@ if __name__ == '__main__':
     prs.add_argument("-runs", dest="runs", type=int, default=1, help="Number of runs.\n")
     args = prs.parse_args()
     experiment_time = str(datetime.now()).split('.')[0]
-    out_csv = 'outputs/2x2/result-alpha0.1-gamma0.99 test'
+    out_csv = 'outputs/2x2/result-alpha0.1-gamma0.99 test bassa frequenza'
     output_file = 'output.csv'
     env = SumoEnvironment(net_file='nets/2x2grid/2x2.net.xml',
                           route_file=args.route,
