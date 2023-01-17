@@ -3,7 +3,7 @@ lxml==4.5.2
 matplotlib==3.3.1
 numpy==1.19.2
 pandas==1.0.5
-PettingZoo==1.18.1
+PettingZoo==1.12.0
 pyvirtualdisplay==3.0
 scipy==1.5.2
 seaborn==0.10.1
