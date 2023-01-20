@@ -14,7 +14,7 @@ else:
     sys.exit("Please declare the environment variable 'SUMO_HOME'")
 
 import traci
-from sumo_rl.environment.env import SumoEnvironment
+from environment.env import SumoEnvironment
 from ql_agent import QLAgent
 from sumo_rl.exploration import EpsilonGreedy
 

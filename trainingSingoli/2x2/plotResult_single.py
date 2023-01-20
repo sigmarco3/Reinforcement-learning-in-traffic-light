@@ -33,6 +33,7 @@ def plotResult(file):
         from matplotlib.pyplot import figure
         figure(figsize=(18, 10), dpi=80)
         x = df['step']
+        t =df['total_vehicle']
         ym = df['system_total_waiting_time']
         zm = df['system_total_stopped']
         um = df['system_mean_waiting_time']
@@ -54,7 +55,7 @@ def plotResult(file):
 
         std_error = np.std(ym, ddof=1) / np.sqrt(len(ym))
         # create chart
-        plt.bar(x=x,  # x-coordinates of bars
+        plt.bar(x=t,  # x-coordinates of bars
         height=ym,yerr=std_error)
 
         plt.title('2x2 wait (alpha 0.1 gamma 0.99) misura total waiting time')
@@ -67,7 +68,7 @@ def plotResult(file):
 
         std_error = np.std(zm, ddof=1) / np.sqrt(len(zm))
         # create chart
-        plt.bar(x=x,  # x-coordinates of bars
+        plt.bar(x=t,  # x-coordinates of bars
         height=zm,  # height of bars
         yerr=std_error,  # error bar width
         capsize=4)
@@ -103,4 +104,4 @@ def plotResult(file):
         plt.ylabel("system mean speed(Km/h)")
         plt.show()
 if __name__ == '__main__':
-    plotResult('D:/programmi/sumo/esperimenti semafori/outputs/2x2/result-alpha0.1-gamma0.99 trainingSingoli')
+    plotResult('D:/programmi/sumo/esperimenti semafori/Reinforcement-learning-in-traffic-light/outputs/2x2/result-alpha0.1-gamma0.99_test_bassa_frequenza')
