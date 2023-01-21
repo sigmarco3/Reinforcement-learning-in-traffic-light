@@ -44,10 +44,10 @@ def plotResult(file):
         # definiamo le dimensioni della finestra in pollici ed il dpi
         from matplotlib.pyplot import figure
         figure(figsize=(18, 10), dpi=80)
-        x = df['step']
-        y = df['system_total_waiting_time']
-        plt.xlabel("step")
-        plt.ylabel("sistem total waiting time")
+        x = df['total_vehicle']
+        y = df['system_total_stopped']
+        plt.xlabel("auto")
+        plt.ylabel("sistem total stopped")
         plt.plot(x, y)
         plt.show()
 if __name__ == '__main__':
@@ -87,8 +87,8 @@ if __name__ == '__main__':
             for agent_id in s.keys():
                 ql_agents[agent_id].learn(next_state=env.encode(s[agent_id], agent_id), reward=r[agent_id])
 
-        env.save_csv('outputs/4x4/ql-4x4grid-variReward-2000sec', run)
+        env.save_csv('outputs/4x4/ql-4x4grid-variReward-2000sec(e auto)', run)
         env.close()
         if run==4:
-            plotResult('outputs/4x4/ql-4x4grid-variReward-2000sec')
+            plotResult('outputs/4x4/ql-4x4grid-variReward-2000sec(e auto)')
 

@@ -374,12 +374,14 @@ class SumoEnvironment(gym.Env):
         vehicles = self.sumo.vehicle.getIDList()
         speeds = [self.sumo.vehicle.getSpeed(vehicle) for vehicle in vehicles]
         waiting_times = [self.sumo.vehicle.getWaitingTime(vehicle) for vehicle in vehicles]
+        totals = self.sumo.vehicle.getIDCount()
         return {
             # In SUMO, a vehicle is considered halting if its speed is below 0.1 m/s
             'system_total_stopped': sum(int(speed < 0.1) for speed in speeds),
             'system_total_waiting_time': sum(waiting_times),
             'system_mean_waiting_time': np.mean(waiting_times),
-            'system_mean_speed': 0.0 if len(vehicles) == 0 else np.mean(speeds)
+            'system_mean_speed': 0.0 if len(vehicles) == 0 else np.mean(speeds),
+            'total_vehicle': totals
         }
     
     def _get_per_agent_info(self):

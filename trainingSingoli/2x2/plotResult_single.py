@@ -34,11 +34,41 @@ def plotResult(file):
         figure(figsize=(18, 10), dpi=80)
         x = df['step']
         t =df['total_vehicle']
-        ym = df['system_total_waiting_time']
-        zm = df['system_total_stopped']
-        um = df['system_mean_waiting_time']
-        vm = df['system_mean_speed']
+        y = df['system_total_waiting_time']
+        z = df['system_total_stopped']
+        u = df['system_mean_waiting_time']
+        v = df['system_mean_speed']
 
+
+        df1 = pd.read_csv(file + '_conn0_run2.csv')
+        y1 = df['system_total_waiting_time']
+
+
+        t1 = df1['total_vehicle']
+        z1 = df1['system_total_stopped']
+        u1 = df1['system_mean_waiting_time']
+        v1 = df1['system_mean_speed']
+        df2 = pd.read_csv(file + '_conn0_run3.csv')
+        y2 = df2['system_total_waiting_time']
+        z2 = df2['system_total_stopped']
+        u2 = df2['system_mean_waiting_time']
+        v2 = df2['system_mean_speed']
+
+
+        t2 = df2['total_vehicle']
+        df3 = pd.read_csv(file + '_conn0_run4.csv')
+        y3 = df3['system_total_waiting_time']
+        z3 = df3['system_total_stopped']
+        u3 = df3['system_mean_waiting_time']
+        v3 = df3['system_mean_speed']
+
+
+        t3 = df3['total_vehicle']
+        ym = (y + y1 + y2 + y3) / 4
+        zm = (z + z1 + z2 + z3) / 4
+        tm = (t + t1 +t2 +t3)/4
+        um = (u + u1 + u2 + u3) / 4
+        vm = (v + v1 + v2 + v3) / 4
 
 
         #plt.ylabel("system_total_waiting time")
@@ -55,9 +85,15 @@ def plotResult(file):
 
         std_error = np.std(ym, ddof=1) / np.sqrt(len(ym))
         # create chart
-        plt.bar(x=t,  # x-coordinates of bars
-        height=ym,yerr=std_error)
 
+        # fig ,ax = plt.subplots(1)
+        # ax.plot(x, mu1, lw=2, label='total waiting time', color='blue')
+        #
+        # ax.fill_between(x, mu1 + sigma1, mu1 - sigma1, facecolor='blue', alpha=0.5)
+        plt.bar(x=tm,  # x-coordinates of bars
+        height=ym,yerr=std_error)
+        # ax.set_ylabel("total waiting time")
+        # ax.grid()
         plt.title('2x2 wait (alpha 0.1 gamma 0.99) misura total waiting time')
         plt.xlabel('step')
         plt.ylabel('system total waiting time(seconds)')
@@ -68,7 +104,7 @@ def plotResult(file):
 
         std_error = np.std(zm, ddof=1) / np.sqrt(len(zm))
         # create chart
-        plt.bar(x=t,  # x-coordinates of bars
+        plt.bar(x=tm,  # x-coordinates of bars
         height=zm,  # height of bars
         yerr=std_error,  # error bar width
         capsize=4)
@@ -104,4 +140,4 @@ def plotResult(file):
         plt.ylabel("system mean speed(Km/h)")
         plt.show()
 if __name__ == '__main__':
-    plotResult('D:/programmi/sumo/esperimenti semafori/Reinforcement-learning-in-traffic-light/outputs/2x2/result-alpha0.1-gamma0.99_test_bassa_frequenza')
+    plotResult('D:/programmi/sumo/esperimenti semafori/Reinforcement-learning-in-traffic-light/outputs/2x2/result-alpha0.1-gamma0.99_trainingCopiato_50v')
