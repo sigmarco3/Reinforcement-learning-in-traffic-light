@@ -51,7 +51,7 @@
      
     <flow id="flow_24" from="-h21" to="v11" begin="0" end="100000" vehsPerHour="25" departSpeed="max" departPos="base" departLane="best"/>
     
-    <flow id="flow_25" from="-h21" to="-v13" begin="0" end="100000" vehsPerHour="50" departSpeed="max" departPos="base" departLane="best"/> 
+    <flow id="flow_25" from="-h21" to="-v13" begin="0" end="100000" vehsPerHour="25" departSpeed="max" departPos="base" departLane="best"/> 
     
     
 </routes>
