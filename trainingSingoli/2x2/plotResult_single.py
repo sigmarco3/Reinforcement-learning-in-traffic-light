@@ -95,7 +95,7 @@ def plotResult(file):
         # ax.set_ylabel("total waiting time")
         # ax.grid()
         plt.title('2x2 wait (alpha 0.1 gamma 0.99) misura total waiting time')
-        plt.xlabel('step')
+        plt.xlabel('auto')
         plt.ylabel('system total waiting time(seconds)')
         plt.show()
 
@@ -104,7 +104,8 @@ def plotResult(file):
 
         std_error = np.std(zm, ddof=1) / np.sqrt(len(zm))
         # create chart
-        plt.bar(x=tm,  # x-coordinates of bars
+        fig , ax = plt.subplots(1)
+        ax.bar(x=tm,  # x-coordinates of bars
         height=zm,  # height of bars
         yerr=std_error,  # error bar width
         capsize=4)
@@ -118,11 +119,11 @@ def plotResult(file):
 
         std_error = np.std(um, ddof=1) / np.sqrt(len(um))
         # create chart
-        plt.bar(x=x,  # x-coordinates of bars
+        plt.bar(x=tm,  # x-coordinates of bars
         height=um,  # height of bars
         yerr=std_error,  # error bar width
         capsize=4)
-        plt.xlabel("step")
+        plt.xlabel("auto")
         plt.title("2x2 wait(alpha 0.1 gamma 0.99) misura mean waiting time ")
         plt.ylabel("system mean waiting time(seconds)")
         plt.show()
